@@ -8,6 +8,8 @@ import 'about_page.dart';
 import 'shop_page.dart';
 
 class HomePage extends StatefulWidget {
+  final String userEmail;
+  const HomePage({required this.userEmail});
 
   State<HomePage> createState() => _HomePageState();
 }
@@ -65,7 +67,9 @@ class _HomePageState extends State<HomePage> {
                       Navigator.pop(context);
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => HomePage()),
+                        MaterialPageRoute(builder: (context) => HomePage(
+                          userEmail: widget.userEmail,
+                        )),
                       );
                     },
                     child: ListTile(
