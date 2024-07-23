@@ -1,10 +1,12 @@
 import 'package:coffee_new_app/components/bottom_nav_bar.dart';
 import 'package:coffee_new_app/const.dart';
 import 'package:coffee_new_app/pages/cart_page.dart';
+import 'package:coffee_new_app/pages/login_page.dart';
 import 'package:flutter/material.dart';
 
 import '../components/coffee_tile.dart';
 import 'about_page.dart';
+import 'coffee_manger.dart';
 import 'shop_page.dart';
 
 class HomePage extends StatefulWidget {
@@ -23,12 +25,17 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  final List _pages = [
-    ShopPage(),
-    CartPage(),
-  ];
+  void initState() {
+    super.initState();
+    print('User Email: ${widget.userEmail}');
+  }
+
 
   Widget build(BuildContext context) {
+    final List _pages = [
+    ShopPage(),
+    CartPage(userEmail: widget.userEmail,),
+  ];
     return Scaffold(
       backgroundColor: backgroundColor,
       bottomNavigationBar: MyBottomNavBar(onTabChange:  navigateBottomBar),
@@ -94,7 +101,27 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                 ),
+                if (widget.userEmail == 'ohadleib@gmail.com')
+            GestureDetector(
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => CoffeeManager()
+                  ),
+                );
+              },
+              child: Padding(
+                padding: EdgeInsets.only(left: 25.0),
+                child: ListTile(
+                  leading: Icon(Icons.manage_accounts),
+                  title: (Text("Manage Products")),
+                ),
+              ),
+            ),
               ],
+              
             ),
             GestureDetector(
               onTap: () {

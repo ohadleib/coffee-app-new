@@ -7,19 +7,22 @@ import '../model/coffee_shop.dart';
 import 'credit_card_page.dart';
 
 class CartPage extends StatefulWidget {
-  @override
+  final String userEmail;
+
+  CartPage({required this.userEmail});
+
   State<CartPage> createState() => _CartPageState();
 }
 
 class _CartPageState extends State<CartPage> {
   void removeItemFromCart(Coffee coffee) {
-    Provider.of<CoffeeShop>(context, listen: false).removeFromCart(coffee);
+    Provider.of<CoffeeShop>(context, listen: false).removeItemToCart(coffee);
   }
 
   void payNow() {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => CreditCardPage()),
+      MaterialPageRoute(builder: (context) => CreditCardPage(userEmail: widget.userEmail)),
     );
   }
 

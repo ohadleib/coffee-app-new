@@ -119,7 +119,7 @@ class _LoginPageState extends State<LoginPage> {
   void _registerNewUser() async {
     User? user = FirebaseAuth.instance.currentUser;
     if (user != null) {
-      await FirebaseFirestore.instance.collection('users').doc(user.uid).set({
+      await FirebaseFirestore.instance.collection('users').add({
         'name': _emailController.text.trim(),
         'phone': _phoneController.text.trim(),
         'email': _emailController.text.trim(),
